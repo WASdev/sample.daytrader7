@@ -1,0 +1,4 @@
+task clean (type: Delete){
+    delete fileTree(dir: 'servers', includes: ['**/logs/*', '**/apps/*', '**/workarea/*'])
+	delete fileTree(dir: 'shared/resources', includes: ['**/data/*', '**/Daytrader7SampleDerbyLibs/*'])
+}

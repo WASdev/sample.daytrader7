@@ -1,0 +1,8 @@
+/.settings/
+/target/
+.*.swp
+/.project
+/.settings/
+.DS_Store
+/build/
+/.gradle/

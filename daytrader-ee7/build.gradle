@@ -1,0 +1,113 @@
+apply plugin: 'ear'
+apply plugin: 'java' 
+apply plugin: 'eclipse-wtp'
+apply plugin: 'maven-publish'
+
+// Use the Liberty Gradle plugin to run our functional tests
+apply plugin: 'liberty'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = 'Sonatype Nexus Snapshots'
+            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+    }
+    dependencies {
+        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:1.0-SNAPSHOT'
+        if (hasProperty('libertyRoot')) {
+            classpath file("${libertyRoot}/bin/tools/ws-server.jar")
+        }
+    }
+}
+archivesBaseName = 'daytrader-ee7'
+
+ear {
+  
+   manifest {
+      attributes 'Implementation-Title': 'DayTrader 7'
+   }
+   archiveName="$baseName.$extension"
+}
+
+// Copy EAR into the local usr dir
+task publishEar(dependsOn: 'ear', type: Copy) {
+    from(ear)
+    into('../daytrader-ee7-wlpcfg/servers/daytrader7Sample/apps')
+}
+
+task copyDerbyLib(type: Copy) {
+    into "../daytrader-ee7-wlpcfg/shared/resources/Daytrader7SampleDerbyLibs"
+    from configurations.runtime
+}
+
+assemble.dependsOn('publishEar','copyDerbyLib')
+
+/* publishing {
+    publications {
+        mavenWar(MavenPublication) {
+            version '1.0-SNAPSHOT'
+            groupId 'net.wasdev.wlp.sample'
+            artifactId 'daytrader-ee7'
+            
+            from components.web
+        }
+    }
+} */
+
+// Add a functional test task that runs during the 'check' phase that uses the Liberty Gradle plugin
+// to launch Liberty and run the test classes in the fvt source set
+task fvt(type: Test, dependsOn: jar) {
+    group 'Verification'
+    description 'Runs the functional verification tests.'
+    reports.html.destination = file("$buildDir/reports/fvt")
+    reports.junitXml.destination = file("$buildDir/test-results/fvt")
+    include '**/fvt/**'
+    exclude '**/unit/**'
+    systemProperties = ['liberty.test.port': getHttpPort()]
+    dependsOn publishEar, libertyStart
+    finalizedBy libertyStop
+}
+
+test {
+	reports.html.destination = file("$buildDir/reports/unit")
+	reports.junitXml.destination = file("$buildDir/test-results/unit")
+	include '**/unit/**'
+	exclude '**/fvt/**'
+}
+
+repositories { mavenCentral(); }
+dependencies {
+   deploy project (path: ':daytrader-ee7-ejb', configuration: 'archives')
+   deploy project (path: ':daytrader-ee7-web', configuration: 'archives')
+   compile group: 'org.apache.derby', name: 'derby', version: '10.10.1.1'
+}
+String getHttpPort() {
+    def DEFAULT_HTTP_PORT = 9082
+    def serverXmlFile = file(new File('../daytrader-ee7-wlpcfg/servers/daytrader7Sample/server.xml'))
+    def portPattern = ~/.*httpPort="(\d+)".*/
+    serverXmlFile.eachLine { line -> 
+        def portMatcher = line =~ portPattern
+        if (portMatcher) {
+            return portMatcher.group(1)
+        }
+    }
+    return DEFAULT_HTTP_PORT
+}
+
+libertyStart.mustRunAfter publishEar
+
+liberty {
+    wlpDir = owner.hasProperty('libertyRoot') ? "${libertyRoot}" : null
+    serverName = 'daytrader7Sample'
+    userDir = '../daytrader-ee7-wlpcfg'
+    // Clean is only supported on the latest Liberty Gradle plugin which isn't on Maven yet
+//    clean = true
+}
+
+if (hasProperty('libertyRoot') && file("${libertyRoot}").exists() && file("${libertyRoot}/lib/ws-launch.jar").exists()) {
+    check.dependsOn fvt
+} else {
+    logger.error('Unable to run integration tests because the libertyRoot property is not set to a directory that contains the /lib/ws-launch.jar file.  Set it in daytrader7Sample/gradle.properties to your Liberty installation.')
+}

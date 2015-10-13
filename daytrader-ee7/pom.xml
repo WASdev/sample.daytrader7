@@ -1,0 +1,210 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+   <parent>
+        <groupId>net.wasdev.wlp.sample</groupId>
+        <artifactId>sample.daytrader7</artifactId>
+       <version>1.0-SNAPSHOT</version>
+    </parent>
+	
+	<name>WAS Liberty Sample - Java EE7 Benchmark Sample - EAR</name>
+
+    <properties>
+        <!-- Update this to match the port number in the websocketSample server.xml
+        This is needed to run the tests -->
+        <libertyTestPort>9082</libertyTestPort>
+        <skipFVT>true</skipFVT>
+    </properties>
+	
+	<artifactId>daytrader-ee7</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	
+	<build>
+        <plugins>
+	<plugin>
+   <groupId>org.apache.maven.plugins</groupId>
+   <artifactId>maven-ear-plugin</artifactId>
+   <configuration>
+        <version>6</version>
+    <fileNameMapping>no-version</fileNameMapping>
+   </configuration>
+	</plugin>
+
+	<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+						<id>copy-resources1</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>../daytrader-ee7-wlpcfg/shared/resources/Daytrader7SampleDerbyLibs</outputDirectory>
+							<stripVersion>false</stripVersion>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.apache.derby</groupId>
+                                    <artifactId>derby</artifactId>
+                                    <version>10.10.1.1</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+					 <execution>
+						 <id>copy-resources2</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>../daytrader-ee7-wlpcfg/servers/daytrader7Sample/apps</outputDirectory>
+                            <stripVersion>true</stripVersion>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>sample.daytrader7</groupId>
+                                    <artifactId>daytrader-ee7</artifactId>
+                                    <version>1.0-SNAPSHOT</version>
+                                    <type>ear</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			            <!-- Enable liberty-maven plugin so that we can start and stop a server before running tests -->
+            <plugin>
+                <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>1.1-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <id>start-server</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start-server</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipFVT}</skip>
+                            <configFiles>${basedir}/../daytrader-ee7-wlpcfg/servers/daytrader7Sample/server.xml</configFiles>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-server</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop-server</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipFVT}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <installDirectory>${libertyBaseDir}</installDirectory>
+                    <serverName>daytrader7Sample</serverName>
+                    <userDirectory>${basedir}/../daytrtader-ee7-wlpcfg</userDirectory>
+                </configuration>
+            </plugin>
+            <!-- Plugin to run functional tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/fvt/**</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/unit/**</exclude>
+                            </excludes>
+                            <systemPropertyVariables>
+                                <liberty.test.port>${libertyTestPort}</liberty.test.port>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>verify-tests</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>${skipFVT}</skip>
+                    <summaryFile>${project.build.directory}/test-reports/fvt/failsafe-summary.xml</summaryFile>
+                    <reportsDirectory>${project.build.directory}/test-reports/fvt</reportsDirectory>
+                </configuration>
+            </plugin>
+            <!-- Plugin to run unit tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <id>default-test</id>
+                        <configuration>
+                            <includes>
+                                <include>**/unit/**</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/fvt/**</exclude>
+                            </excludes>
+                            <reportsDirectory>${project.build.directory}/test-reports/unit</reportsDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+	
+    <packaging>ear</packaging>
+
+	<profiles>
+        <profile>
+            <id>check-liberty-present</id>
+            <activation>
+                <file>
+                    <exists>${libertyRoot}/lib/ws-launch.jar</exists>
+                </file>
+            </activation>
+            <properties>
+                <skipFVT>false</skipFVT>
+                <libertyBaseDir>${libertyRoot}</libertyBaseDir>
+            </properties>
+        </profile>
+    </profiles>
+	
+	<dependencies>
+
+		
+    <dependency>
+        <groupId>sample.daytrader7</groupId>
+        <artifactId>daytrader-ee7-ejb</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <type>jar</type>
+    </dependency>
+	<dependency>
+        <groupId>sample.daytrader7</groupId>
+        <artifactId>daytrader-ee7-web</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <type>war</type>
+    </dependency>
+    </dependencies>
+	
+	
+	
+	  
+</project>
