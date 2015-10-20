@@ -4,11 +4,11 @@
         <feature>servlet-3.1</feature>
         <feature>jsf-2.2</feature>
         <feature>jpa-2.1</feature>
-        <feature>jmsMdb-3.2</feature>
+        <feature>mdb-3.2</feature>
         <feature>wasJmsServer-1.0</feature>
         <feature>wasJmsClient-2.0</feature>
         <feature>cdi-1.2</feature>
-        <feature>websocket-1.0</feature>
+        <feature>websocket-1.1</feature>
         <feature>concurrent-1.0</feature>
         <feature>jsonp-1.0</feature>
         <feature>beanValidation-1.1</feature>

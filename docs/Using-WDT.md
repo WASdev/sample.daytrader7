@@ -29,6 +29,7 @@ If the sample git repository hasn't been cloned yet, WDT has git tools integrate
 
 This sample can be built using either [Gradle](#building-with-gradle) or [Maven](#building-with-maven).
 
+#building-with-gradle
 #### Building with [Gradle](http://gradle.org/)
 
 ###### Import Gradle projects into WDT
@@ -40,21 +41,20 @@ This assumes you have the Gradle [Buildship](https://projects.eclipse.org/projec
 3. Select menu *File -> Import -> Gradle -> Gradle Project*
 4. In the *Project root directory* folder textbox, Paste in the repository directory.
 5. Click *Next* twice
-6. Three projects should be listed in the *Gradle project structure* click *Finish*
+6. Five projects should be listed in the *Gradle project structure* click *Finish*
 7. This will create 5 projects in Eclipse: sample.daytrader7, daytrader-ee7, daytrader-ee7-ejb, daytrader-ee7-web, daytrader-ee7-wlpcfg
 8. Go to the *Gradle Tasks* view in Eclipse and navigate to the *sample.daytrader7* project
 9. Double click on the *eclipse* task to generate all the Eclipse files
-10. In the *Enterprise Explorer* view in Eclipse right click on the three projects mentioned in step 7 and click refresh
+10. In the *Enterprise Explorer* view in Eclipse right click on the five projects mentioned in step 7 and click refresh
 
 :star: *Note:* If you did not use Eclipse/WDT to clone the git repository, follow from step 3, but navigate to the cloned repository directory rather than pasting its name in step 4.
 
 ###### Run Gradle build
 
-1. Right-click on async-websocket/build.gradle
-2. *Run As > Gradnle Build...*
-3. In the *Gradle Tasks* section enter "build"
-4. Click *Run*
+1. Go to the *Gradle Tasks* view in Eclipse and navigate to the *sample.daytrader7* project
+2. Double click: build
 
+#building-with-maven
 #### Building with [Maven](http://maven.apache.org/)
 
 ###### Import Maven projects into WDT
@@ -70,7 +70,7 @@ This assumes you have the Gradle [Buildship](https://projects.eclipse.org/projec
 
 ###### Run Maven install
 
-1. Right-click on async-websocket/pom.xml
+1. Right-click on sample.daytrader7/pom.xml
 2. *Run As > Maven build...*
 3. In the *Goals* section enter "install"
 4. Click *Run*
@@ -92,6 +92,7 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
 4. Either:
     * Select an existing installation (perhaps what you downloaded earlier, if you followed those instructions), or
     * select *Install from an archive or a repository* to download a new Liberty archive.
+    * Choose an option with Java EE7 Full Platform.  
 5. Follow the prompts (and possibly choose additional features to install) until you *Finish* creating the Runtime Environment
 
 ###### Add the User directory from the maven or Gradle project, and create a server
@@ -124,7 +125,7 @@ daytrader-ee7-wlpcfg
 ```
 
 1.  Select the Servers tab
-2.  Right-click on the appropriate server (as created above) and select *Start*-> 
+2.  Right-click on the appropriate server (as created above) and select *Start* (For now, ignore any EJB errors) 
 3.  Confirm web browser opens on "http://localhost:9082/daytrader/" or "http://localhost:9082/daytrader/index.faces"
 4.  In the web browser, Click on the configuration tab.
 5.  Click on '(Re)-create  DayTrader Database Tables and Indexes' to create the database.
