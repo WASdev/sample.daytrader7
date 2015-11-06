@@ -150,7 +150,7 @@
             </dependency>
 		
     <dependency>
-        <groupId>sample.daytrader7</groupId>
+        <groupId>net.wasdev.wlp.sample</groupId>
         <artifactId>daytrader-ee7-ejb</artifactId>
         <version>1.0-SNAPSHOT</version>
         <type>jar</type>

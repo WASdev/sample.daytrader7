@@ -18,6 +18,21 @@
 	<artifactId>daytrader-ee7</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	
+
+        <pluginRepositories>
+        <!-- Configure Sonatype OSS Maven snapshots repository -->
+        <pluginRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
 	<build>
         <plugins>
 	<plugin>
@@ -64,7 +79,7 @@
                             <stripVersion>true</stripVersion>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>sample.daytrader7</groupId>
+                                    <groupId>net.wasdev.wlp.sample</groupId>
                                     <artifactId>daytrader-ee7</artifactId>
                                     <version>1.0-SNAPSHOT</version>
                                     <type>ear</type>
@@ -191,13 +206,13 @@
 
 		
     <dependency>
-        <groupId>sample.daytrader7</groupId>
+        <groupId>net.wasdev.wlp.sample</groupId>
         <artifactId>daytrader-ee7-ejb</artifactId>
         <version>1.0-SNAPSHOT</version>
         <type>jar</type>
     </dependency>
 	<dependency>
-        <groupId>sample.daytrader7</groupId>
+        <groupId>net.wasdev.wlp.sample</groupId>
         <artifactId>daytrader-ee7-web</artifactId>
         <version>1.0-SNAPSHOT</version>
         <type>war</type>
