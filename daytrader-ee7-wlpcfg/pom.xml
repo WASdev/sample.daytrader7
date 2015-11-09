@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>net.wasdev.wlp.sample</groupId>
-        <artifactId>sample.daytrader7</artifactId>
+        <artifactId>daytrader7</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
