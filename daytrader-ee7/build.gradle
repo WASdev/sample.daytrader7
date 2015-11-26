@@ -15,10 +15,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:1.0-SNAPSHOT'
-        if (hasProperty('libertyRoot')) {
-            classpath file("${libertyRoot}/bin/tools/ws-server.jar")
-        }
+        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:1.1-SNAPSHOT'
     }
 }
 archivesBaseName = 'daytrader-ee7'
@@ -42,8 +39,6 @@ task copyDerbyLib(type: Copy) {
     from configurations.runtime
 }
 
-assemble.dependsOn('publishEar','copyDerbyLib')
-
 /* publishing {
     publications {
         mavenWar(MavenPublication) {
@@ -58,7 +53,7 @@ assemble.dependsOn('publishEar','copyDerbyLib')
 
 // Add a functional test task that runs during the 'check' phase that uses the Liberty Gradle plugin
 // to launch Liberty and run the test classes in the fvt source set
-task fvt(type: Test, dependsOn: jar) {
+task fvt(type: Test, dependsOn: publishEar) {
     group 'Verification'
     description 'Runs the functional verification tests.'
     reports.html.destination = file("$buildDir/reports/fvt")
@@ -66,7 +61,7 @@ task fvt(type: Test, dependsOn: jar) {
     include '**/fvt/**'
     exclude '**/unit/**'
     systemProperties = ['liberty.test.port': getHttpPort()]
-    dependsOn publishEar, libertyStart
+    dependsOn libertyStart
     finalizedBy libertyStop
 }
 
@@ -102,12 +97,19 @@ liberty {
     wlpDir = owner.hasProperty('libertyRoot') ? "${libertyRoot}" : null
     serverName = 'daytrader7Sample'
     userDir = '../daytrader-ee7-wlpcfg'
-    // Clean is only supported on the latest Liberty Gradle plugin which isn't on Maven yet
-//    clean = true
+    clean = true
+    install {
+        type = "javaee7"
+    }
 }
 
-if (hasProperty('libertyRoot') && file("${libertyRoot}").exists() && file("${libertyRoot}/lib/ws-launch.jar").exists()) {
-    check.dependsOn fvt
-} else {
-    logger.error('Unable to run integration tests because the libertyRoot property is not set to a directory that contains the /lib/ws-launch.jar file.  Set it in daytrader7Sample/gradle.properties to your Liberty installation.')
+assemble.dependsOn('publishEar','copyDerbyLib')
+
+// If libertyRoot is not set, automatically download & install Liberty runtime
+if (!hasProperty('libertyRoot')) {
+    fvt.dependsOn('installLiberty')
 }
+
+// Run FVT by default
+check.dependsOn fvt
+
