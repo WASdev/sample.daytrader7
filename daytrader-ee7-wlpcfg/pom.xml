@@ -30,16 +30,16 @@
                             <directory>servers/daytrader7Sample</directory>
                             <followSymlinks>false</followSymlinks>
                             <includes>
-                                <include>**/logs/*</include>
+                                <include>**/logs/**</include>
                                 <include>**/apps/*</include>
-                                <include>**/workarea/*</include>
+                                <include>**/workarea/**</include>
                             </includes>
                         </fileset>
 						 <fileset>
                             <directory>shared</directory>
                             <followSymlinks>false</followSymlinks>
                             <includes>
-                                <include>**/resources/data/*</include>
+                                <include>**/resources/data/**</include>
                                 <include>**/resources/Daytrader7SampleDerbyLibs/*</include>
                             </includes>
                         </fileset>
