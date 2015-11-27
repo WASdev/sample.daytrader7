@@ -1,4 +1,6 @@
-task clean (type: Delete){
-    delete fileTree(dir: 'servers', includes: ['**/logs/*', '**/apps/*', '**/workarea/*'])
-	delete fileTree(dir: 'shared/resources', includes: ['**/data/*', '**/Daytrader7SampleDerbyLibs/*'])
+task clean << {
+    ant.delete(includeemptydirs: 'true') {
+        fileset(dir: 'servers', includes: '**/logs/**, **/apps/*, **/workarea/**')
+        fileset(dir: 'shared/resources', includes: '**/data/**, **/Daytrader7SampleDerbyLibs/*')
+    }
 }
