@@ -94,7 +94,7 @@ String getHttpPort() {
 libertyStart.mustRunAfter publishEar
 
 liberty {
-    wlpDir = owner.hasProperty('libertyRoot') ? "${libertyRoot}" : null
+    installDir = owner.hasProperty('libertyRoot') ? "${libertyRoot}" : null
     serverName = 'daytrader7Sample'
     userDir = '../daytrader-ee7-wlpcfg'
     clean = true
