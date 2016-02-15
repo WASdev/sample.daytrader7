@@ -37,8 +37,8 @@ import com.ibm.websphere.samples.daytrader.util.Log;
 @WebServlet(name = "PingServlet", urlPatterns = { "/servlet/PingServlet" })
 public class PingServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 8731300373855056660L;
-    private static String initTime;
+	private static final long serialVersionUID = 7097023236709683760L;
+	private static String initTime;
     private static int hitCount;
 
     /**

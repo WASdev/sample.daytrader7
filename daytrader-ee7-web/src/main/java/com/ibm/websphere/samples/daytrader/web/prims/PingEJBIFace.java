@@ -16,26 +16,9 @@
 package com.ibm.websphere.samples.daytrader.web.prims;
 
 /**
- * Simple bean to get and set messages
+ * EJB interface
  */
+public interface PingEJBIFace {
 
-public class PingBean {
-
-    private String msg;
-
-    /**
-     * returns the message contained in the bean
-     *
-     * @return message String
-     **/
-    public String getMsg() {
-        return msg;
-    }
-
-    /**
-     * sets the message contained in the bean param message String
-     **/
-    public void setMsg(String s) {
-        msg = s;
-    }
+    public String getMsg();
 }

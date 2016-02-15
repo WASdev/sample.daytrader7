@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corporation 2016.
+ * (C) Copyright IBM Corporation 2015.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,27 @@
  */
 package com.ibm.websphere.samples.daytrader.web.prims;
 
+import javax.ejb.Local;
+import javax.ejb.Stateful;
+
 /**
- * Simple bean to get and set messages
+ *
  */
+@Stateful
+@Local
+public class PingEJBLocal implements PingEJBIFace {
 
-public class PingBean {
+    private static int hitCount;
 
-    private String msg;
-
-    /**
-     * returns the message contained in the bean
-     *
-     * @return message String
-     **/
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.ibm.websphere.samples.daytrader.web.prims.EJBIFace#getMsg()
+     */
+    @Override
     public String getMsg() {
-        return msg;
+
+        return "PingEJBLocal: " + hitCount++;
     }
 
-    /**
-     * sets the message contained in the bean param message String
-     **/
-    public void setMsg(String s) {
-        msg = s;
-    }
 }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corporation 2016.
+ * (C) Copyright IBM Corporation 2015.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,29 @@
  */
 package com.ibm.websphere.samples.daytrader.web.prims;
 
-/**
- * Simple bean to get and set messages
- */
+import javax.annotation.Priority;
+import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
+import javax.interceptor.Interceptor;
 
-public class PingBean {
+@Decorator
+@Priority(Interceptor.Priority.APPLICATION)
+public class PingEJBLocalDecorator implements PingEJBIFace {
 
-    private String msg;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.ibm.websphere.samples.daytrader.web.prims.EJBIFace#getMsg()
+     */
+    @Delegate
+    @Inject
+    PingEJBIFace ejb;
 
-    /**
-     * returns the message contained in the bean
-     *
-     * @return message String
-     **/
+    @Override
     public String getMsg() {
-        return msg;
+
+        return "Decorated " + ejb.getMsg();
     }
 
-    /**
-     * sets the message contained in the bean param message String
-     **/
-    public void setMsg(String s) {
-        msg = s;
-    }
 }

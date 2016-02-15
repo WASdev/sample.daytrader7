@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corporation 2016.
+ * (C) Copyright IBM Corporation 2015.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,28 @@
  */
 package com.ibm.websphere.samples.daytrader.web.prims;
 
+import java.io.Serializable;
+
+import javax.annotation.Priority;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
+import javax.interceptor.InvocationContext;
+
 /**
- * Simple bean to get and set messages
+ *
  */
+@PingInterceptorBinding
+@Interceptor
+@Priority(Interceptor.Priority.APPLICATION)
+public class PingInterceptor implements Serializable {
 
-public class PingBean {
+    /**  */
+    private static final long serialVersionUID = 1L;
 
-    private String msg;
+    @AroundInvoke
+    public Object methodInterceptor(InvocationContext ctx) throws Exception {
 
-    /**
-     * returns the message contained in the bean
-     *
-     * @return message String
-     **/
-    public String getMsg() {
-        return msg;
-    }
-
-    /**
-     * sets the message contained in the bean param message String
-     **/
-    public void setMsg(String s) {
-        msg = s;
+        //noop
+        return ctx.proceed();
     }
 }
