@@ -15,7 +15,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:1.0'
+        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:1.0.1'
     }
 }
 archivesBaseName = 'daytrader-ee7'
