@@ -9,6 +9,8 @@ WDT also provides:
 
 Installing WDT on Eclipse is as simple as a drag-and-drop, but the process is explained [on wasdev.net] [wasdev-wdt].
 
+*Note: Start eclipse with a full SDK, not a JRE.*
+
 [wasdev-wdt]: https://developer.ibm.com/wasdev/downloads/liberty-profile-using-eclipse/
 
 ### Clone Git Repo
@@ -78,7 +80,7 @@ This assumes you have the Gradle [Buildship](https://projects.eclipse.org/projec
 ### Running the application locally
 :pushpin: [Switch to cmd line example](/docs/Using-cmd-line.md/#running-the-application-locally)
 
-Pre-requisite: [Download WAS Liberty](docs/Downloading-WAS-Liberty.md)
+Pre-requisite: [Download WAS Liberty](/docs/Downloading-WAS-Liberty.md)
 
 For the purposes of this sample, we will create the Liberty server (step 3 in the wasdev.net instructions) a little differently to create and customize a Runtime Environment that will allow the server to directly use the configuration in the `daytrader-ee7-wlpcfg` project.
 
