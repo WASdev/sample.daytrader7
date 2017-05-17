@@ -28,8 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.websphere.samples.daytrader.web.prims.PingCDIBean;
 
-@WebServlet("/servlet/PingServletCDIBeanManager")
-public class PingServletCDIBeanManager extends HttpServlet {
+@WebServlet("/servlet/PingServletCDIBeanManagerViaCDICurrent")
+public class PingServletCDIBeanManagerViaCDICurrent extends HttpServlet {
 
     private static final long serialVersionUID = -1803544618879689949L;
     private static String initTime;
@@ -37,6 +37,8 @@ public class PingServletCDIBeanManager extends HttpServlet {
     @Inject
     PingCDIBean cdiBean;
 
+    
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -46,7 +48,7 @@ public class PingServletCDIBeanManager extends HttpServlet {
                  + "<BR><BR></FONT>");
 
         try {
-            pw.write("<B>hitCount: " + cdiBean.getBeanMangerViaJNDI() + "</B></body></html>");
+            pw.write("<B>hitCount: " + cdiBean.getBeanMangerViaCDICurrent() + "</B></body></html>");
         } catch (Exception e) {
             e.printStackTrace();
         }
