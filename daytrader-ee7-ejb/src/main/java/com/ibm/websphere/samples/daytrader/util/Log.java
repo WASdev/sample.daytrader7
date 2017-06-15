@@ -30,7 +30,6 @@ public class Log {
     // A general purpose, high performance logging, tracing, statistic service
 
     public static void log(String message) {
-       log.log(Level.INFO, "DayTrader Log:" + new java.util.Date() + "------\n\t ");
        log.log(Level.INFO, message);
     }
 
