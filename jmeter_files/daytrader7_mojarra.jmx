@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  (C) Copyright IBM Corporation 2015.
- 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
- 
-  http://www.apache.org/licenses/LICENSE-2.0
- 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
- -->
 <jmeterTestPlan version="1.2" properties="2.8" jmeter="2.13 r1665067">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="DayTrader" enabled="true">
@@ -504,7 +489,7 @@
                 <hashTree>
                   <JMeter.plugins.functional.samplers.websocket.WebSocketSampler guiclass="JMeter.plugins.functional.samplers.websocket.WebSocketSamplerGui" testclass="JMeter.plugins.functional.samplers.websocket.WebSocketSampler" testname="MarketSummary WebSocket (close)" enabled="true">
                     <stringProp name="serverAddress">${hostname}</stringProp>
-                    <stringProp name="serverPort">${port}</stringProp>
+                    <stringProp name="serverPort">80</stringProp>
                     <stringProp name="implementation">RFC6455 (v13)</stringProp>
                     <stringProp name="protocol">ws</stringProp>
                     <stringProp name="contextPath">/daytrader/marketsummary</stringProp>
@@ -1757,7 +1742,7 @@
                 <hashTree>
                   <JMeter.plugins.functional.samplers.websocket.WebSocketSampler guiclass="JMeter.plugins.functional.samplers.websocket.WebSocketSamplerGui" testclass="JMeter.plugins.functional.samplers.websocket.WebSocketSampler" testname="MarketSummary WebSocket (leave open)" enabled="true">
                     <stringProp name="serverAddress">${hostname}</stringProp>
-                    <stringProp name="serverPort">${port}</stringProp>
+                    <stringProp name="serverPort">80</stringProp>
                     <stringProp name="implementation">RFC6455 (v13)</stringProp>
                     <stringProp name="protocol">ws</stringProp>
                     <stringProp name="contextPath">/daytrader/marketsummary</stringProp>
@@ -2419,96 +2404,6 @@
                   <hashTree/>
                 </hashTree>
               </hashTree>
-            </hashTree>
-          </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller Struts" enabled="false">
-            <intProp name="ThroughputController.style">1</intProp>
-            <boolProp name="ThroughputController.perThread">true</boolProp>
-            <intProp name="ThroughputController.maxThroughput">1</intProp>
-            <FloatProperty>
-              <name>ThroughputController.percentThroughput</name>
-              <value>5.0</value>
-              <savedValue>0.0</savedValue>
-            </FloatProperty>
-          </ThroughputController>
-          <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UserForm" enabled="true">
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-                <collectionProp name="Arguments.arguments"/>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
-              <stringProp name="HTTPSampler.port">${port}</stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-              <stringProp name="HTTPSampler.protocol">http</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/daytrader/struts2/userForm</stringProp>
-              <stringProp name="HTTPSampler.method">GET</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-              <boolProp name="HTTPSampler.monitor">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
-                <collectionProp name="Asserion.test_strings">
-                  <stringProp name="1720438578">Display Stat</stringProp>
-                </collectionProp>
-                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                <boolProp name="Assertion.assume_success">false</boolProp>
-                <intProp name="Assertion.test_type">2</intProp>
-              </ResponseAssertion>
-              <hashTree/>
-              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
-                <stringProp name="ConstantTimer.delay">${maxthinkingtime}</stringProp>
-              </ConstantTimer>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UserStats" enabled="true">
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="userName" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                    <stringProp name="Argument.value">uid:${__Random(${minimumuid},${maximumuid},)}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                    <stringProp name="Argument.name">userName</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
-              <stringProp name="HTTPSampler.port">${port}</stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-              <stringProp name="HTTPSampler.protocol">http</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/daytrader/struts2/userStats</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-              <boolProp name="HTTPSampler.monitor">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
-                <collectionProp name="Asserion.test_strings">
-                  <stringProp name="-2010626679">User Stat</stringProp>
-                </collectionProp>
-                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                <boolProp name="Assertion.assume_success">false</boolProp>
-                <intProp name="Assertion.test_type">2</intProp>
-              </ResponseAssertion>
-              <hashTree/>
-              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
-                <stringProp name="ConstantTimer.delay">${maxthinkingtime}</stringProp>
-              </ConstantTimer>
-              <hashTree/>
             </hashTree>
           </hashTree>
         </hashTree>
