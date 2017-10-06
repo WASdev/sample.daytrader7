@@ -303,18 +303,5 @@
 
         <auth-method>BASIC</auth-method>
 
-    </login-config>
-
-	<!-- Struts -->
-
-	 <filter>
-        <filter-name>struts2</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
-    </filter>
- 
-    <filter-mapping>
-        <filter-name>struts2</filter-name>
-        <url-pattern>/struts2/*</url-pattern>
-    </filter-mapping>
-    
+    </login-config>	    
 </web-app>
