@@ -24,7 +24,7 @@
 	<title>DayTrader Market</title>
 	<link rel="stylesheet" href="style-jsf.css" type="text/css" />
 	<link rel="shortcut icon" href="./favicon.ico" />
-	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.1/dojo/dojo.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/dojo/1.7.12/dojo/dojo.js"></script>
 
 	<script> 
     require(["dojo/dom", "dojo/on", "dojo/domReady!"], function(dom, on){
@@ -32,7 +32,7 @@
         var url;
         var int;
        
-        url =  "ws://" + window.location.host + "/daytrader/marketsummary";
+        url = ((window.location.protocol === "https:") ? "wss://" : "ws://") + window.location.host + "/daytrader/marketsummary"; 
               
         //Connect and setup handlers
         websocket = new WebSocket(url);
@@ -281,7 +281,7 @@
 						<tbody>
 							<tr>
 								<td align="left" bgcolor="#cccccc">
-									<h3>Marekt Summary</h3>
+									<h3>Market Summary</h3>
 								</td>
 								<td align="right" bgcolor="#cccccc">
 									<div id="date"></div>

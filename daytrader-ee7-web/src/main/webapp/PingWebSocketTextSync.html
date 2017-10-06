@@ -18,7 +18,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WebSocket Primitive - PingWebSocketTextSync</title>
 
-<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.1/dojo/dojo.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/dojo/1.7.12/dojo/dojo.js"></script>
 
 <script type="text/javascript">
     
@@ -26,7 +26,7 @@
         var websocket;
         var url;
        
-        url =  "ws://" + window.location.host + "/daytrader/pingTextSync";
+        url = ((window.location.protocol === "https:") ? "wss://" : "ws://") + window.location.host + "/daytrader/pingTextSync";
         
         //Connect and setup handlers
         websocket = new WebSocket(url);
