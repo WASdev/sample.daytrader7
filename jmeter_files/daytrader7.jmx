@@ -17,7 +17,7 @@
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">${__P(THREADS,50)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(THREADS,50)}</stringProp>
         <longProp name="ThreadGroup.start_time">1355173676000</longProp>
         <longProp name="ThreadGroup.end_time">1355173676000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -51,16 +51,6 @@
         <hashTree/>
         <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
           <collectionProp name="Arguments.arguments">
-            <elementProp name="VIEWSTATE" elementType="Argument">
-              <stringProp name="Argument.name">VIEWSTATE</stringProp>
-              <stringProp name="Argument.value"></stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-            <elementProp name="jsessionid" elementType="Argument">
-              <stringProp name="Argument.name">jsessionid</stringProp>
-              <stringProp name="Argument.value"></stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
             <elementProp name="minimumuid" elementType="Argument">
               <stringProp name="Argument.name">minimumuid</stringProp>
               <stringProp name="Argument.value">${__P(BOTUID,0)}</stringProp>
@@ -83,13 +73,19 @@
             </elementProp>
             <elementProp name="maxthinkingtime" elementType="Argument">
               <stringProp name="Argument.name">maxthinkingtime</stringProp>
-              <stringProp name="Argument.value">0</stringProp>
+              <stringProp name="Argument.value">${__P(MAXTHINKTIME,100)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="maximumsid" elementType="Argument">
               <stringProp name="Argument.name">maximumsid</stringProp>
               <stringProp name="Argument.value">${__P(STOCKS,9999)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="protocol" elementType="Argument">
+              <stringProp name="Argument.name">protocol</stringProp>
+              <stringProp name="Argument.value">${__P(PROTOCOL,http)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">http | https</stringProp>
             </elementProp>
           </collectionProp>
         </Arguments>
@@ -135,7 +131,7 @@
               </elementProp>
               <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
               <stringProp name="HTTPSampler.port">${port}</stringProp>
-              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
               <stringProp name="HTTPSampler.path">/daytrader/welcome.faces</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -191,7 +187,7 @@
               </elementProp>
               <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
               <stringProp name="HTTPSampler.port">${port}</stringProp>
-              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
               <stringProp name="HTTPSampler.path">/daytrader/welcome.faces</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -256,7 +252,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/quote.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -340,7 +336,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/quote.faces</stringProp>
                     <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -386,7 +382,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/tradehome.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -423,7 +419,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/portfolio.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -460,7 +456,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/account.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -526,7 +522,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/quote.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -615,7 +611,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/quote.faces</stringProp>
                     <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -695,7 +691,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/quote.faces</stringProp>
                     <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -741,7 +737,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/portfolio.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -811,7 +807,7 @@
                       </elementProp>
                       <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                       <stringProp name="HTTPSampler.port">${port}</stringProp>
-                      <stringProp name="HTTPSampler.protocol">http</stringProp>
+                      <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                       <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                       <stringProp name="HTTPSampler.path">/daytrader/portfolio.faces</stringProp>
                       <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -858,7 +854,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/account.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -961,7 +957,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/account.faces</stringProp>
                     <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -998,7 +994,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/tradehome.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1047,7 +1043,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/tradehome.faces</stringProp>
                     <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1081,7 +1077,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/register.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1179,7 +1175,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/register.faces</stringProp>
                     <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1213,7 +1209,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/tradehome.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1262,7 +1258,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/tradehome.faces</stringProp>
                     <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1320,7 +1316,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/tradehome.faces</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1369,7 +1365,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/tradehome.faces</stringProp>
                     <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1461,7 +1457,7 @@
               </elementProp>
               <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
               <stringProp name="HTTPSampler.port">${port}</stringProp>
-              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
               <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1541,7 +1537,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1595,7 +1591,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1640,7 +1636,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1685,7 +1681,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1766,7 +1762,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1813,7 +1809,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1867,7 +1863,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1933,7 +1929,7 @@
                       </elementProp>
                       <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                       <stringProp name="HTTPSampler.port">${port}</stringProp>
-                      <stringProp name="HTTPSampler.protocol">http</stringProp>
+                      <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                       <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                       <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                       <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1988,7 +1984,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2070,7 +2066,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2115,7 +2111,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2140,7 +2136,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/register.jsp</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2229,7 +2225,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2262,7 +2258,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2319,7 +2315,7 @@
                     </elementProp>
                     <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
                     <stringProp name="HTTPSampler.port">${port}</stringProp>
-                    <stringProp name="HTTPSampler.protocol">http</stringProp>
+                    <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
                     <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                     <stringProp name="HTTPSampler.path">/daytrader/app</stringProp>
                     <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -2471,7 +2467,7 @@
       </ResultCollector>
       <hashTree/>
     </hashTree>
-    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="false">
       <boolProp name="WorkBench.save">true</boolProp>
     </WorkBench>
     <hashTree/>

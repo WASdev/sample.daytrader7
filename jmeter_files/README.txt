@@ -24,10 +24,16 @@ Use the Jmeter plugin manager or download via https://bitbucket.org/pjtr/jmeter-
 The script has the following options:
 	-JHOST	    The name of the machine running the DayTrader Application. The default is localhost.
 	-JPORT	    The HTTP port of the server running the DayTrader Application. The default is 9082.
+	-JPROTOCOL  The transport either http or https
+				NOTE: The websocket plugin does not offer a variable substitution. See the WS note below.
 	-JTHREADS   The number of jmeter threads to start. The default is 50.
+				NOTE: the ramp up time is set to the same value as threads - this provides a smoother startup
 	-JDURATION  The time (in seconds) to run jmeter.
+	-JMAXTHINKTIME The time in milliseconds to wait between each call. The default is 100 ms
 	-JSTOCKS    The total amount of stocks/quotes in the database, minus one. The default is 9999, which assumes there are 10,000 stocks in the database.
 	-JBOTUID    The lowest user id. The default is 0.
 	-JTOPUID    The highest user id. The default is 14999, which assumes there are 15,000 users in the database.
 	
-Example: ./jmeter -n -t daytrader7.jmx -JHOST=myserver -JPORT=9082 -JDURATION=300
+WS NOTE: To enable encrypted WebSocket, either open daytrader7.jmx using the GUI and enable WSS on the WS2 and WS1 calls, or edit the daytrader.jmx file and change the TLS prop to true.
+
+Example: ./jmeter -n -t daytrader7.jmx -JHOST=myserver -JPORT=9082 -JPROTOCOL=http -JMAXTHINKTIME=100 -JDURATION=300
