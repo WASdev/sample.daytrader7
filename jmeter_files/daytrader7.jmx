@@ -17,7 +17,7 @@
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">${__P(THREADS,50)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${__P(THREADS,50)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(RAMP,0)}</stringProp>
         <longProp name="ThreadGroup.start_time">1355173676000</longProp>
         <longProp name="ThreadGroup.end_time">1355173676000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -73,7 +73,7 @@
             </elementProp>
             <elementProp name="maxthinkingtime" elementType="Argument">
               <stringProp name="Argument.name">maxthinkingtime</stringProp>
-              <stringProp name="Argument.value">${__P(MAXTHINKTIME,100)}</stringProp>
+              <stringProp name="Argument.value">${__P(MAXTHINKTIME,0)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="maximumsid" elementType="Argument">

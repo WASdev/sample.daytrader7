@@ -27,9 +27,9 @@ The script has the following options:
 	-JPROTOCOL  The transport either http or https
 				NOTE: The websocket plugin does not offer a variable substitution. See the WS note below.
 	-JTHREADS   The number of jmeter threads to start. The default is 50.
-				NOTE: the ramp up time is set to the same value as threads - this provides a smoother startup
+	-JRAMP		The ramp up time for starting the threads. Set this to the same value as -JTHREADS for a smoother startup. The default is 0.
 	-JDURATION  The time (in seconds) to run jmeter.
-	-JMAXTHINKTIME The time in milliseconds to wait between each call. The default is 100 ms
+	-JMAXTHINKTIME The time in milliseconds to wait between each call. The default is 0 ms
 	-JSTOCKS    The total amount of stocks/quotes in the database, minus one. The default is 9999, which assumes there are 10,000 stocks in the database.
 	-JBOTUID    The lowest user id. The default is 0.
 	-JTOPUID    The highest user id. The default is 14999, which assumes there are 15,000 users in the database.
