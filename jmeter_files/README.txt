@@ -37,3 +37,22 @@ The script has the following options:
 WS NOTE: To enable encrypted WebSocket, either open daytrader7.jmx using the GUI and enable WSS on the WS2 and WS1 calls, or edit the daytrader.jmx file and change the TLS prop to true.
 
 Example: ./jmeter -n -t daytrader7.jmx -JHOST=myserver -JPORT=9082 -JPROTOCOL=http -JMAXTHINKTIME=100 -JDURATION=300
+
+To see output every five seconds from JMeter, edit the following section in <JMETER_HOME>/bin/jmeter.properties
+
+#---------------------------------------------------------------------------
+# Summariser - Generate Summary Results - configuration (mainly applies to non-GUI mode)
+#---------------------------------------------------------------------------
+#
+# Define the following property to automatically start a summariser with that name
+# (applies to non-GUI mode only)
+summariser.name=summary
+#
+# interval between summaries (in seconds) default 30 seconds
+summariser.interval=5
+#
+# Write messages to log file
+summariser.log=true
+#
+# Write messages to System.out
+summariser.out=true
