@@ -241,7 +241,7 @@ public class TradeConfigJSF {
                 } else if (dbProductName.startsWith("Oracle")) { // if the Db is Oracle
                     ddlFile = "/dbscripts/oracle/Table.ddl";
                 } else { // Unsupported "Other" Database
-                    ddlFile = "/dbscripts/other/Table.ddl";
+                    ddlFile = "/dbscripts/derby/Table.ddl";
                     result = result + "TradeBuildDB: **** This Database is unsupported/untested use at your own risk ****<br/>";
                 }
 
