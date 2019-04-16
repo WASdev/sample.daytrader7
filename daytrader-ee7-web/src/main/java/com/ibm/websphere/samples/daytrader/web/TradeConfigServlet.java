@@ -321,7 +321,7 @@ public class TradeConfigServlet extends HttpServlet {
                     } else if (dbProductName.startsWith("Oracle")) { // if the Db is Oracle
                         ddlFile = "/dbscripts/oracle/Table.ddl";
                     } else {// Unsupported "Other" Database
-                        ddlFile = "/dbscripts/other/Table.ddl";
+                        ddlFile = "/dbscripts/derby/Table.ddl";
                         resp.getWriter().println("<BR>TradeBuildDB: **** This Database is unsupported/untested use at your own risk ****</BR>");
                     }
 
