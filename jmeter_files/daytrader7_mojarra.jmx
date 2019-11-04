@@ -109,17 +109,6 @@
           <boolProp name="CounterConfig.per_user">false</boolProp>
         </CounterConfig>
         <hashTree/>
-        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller" enabled="true"/>
-        <hashTree>
-          <eu.luminis.jmeter.wssampler.OpenWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.OpenWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.OpenWebSocketSampler" testname="WS2 Open Connection" enabled="true">
-            <boolProp name="TLS">false</boolProp>
-            <stringProp name="server">${hostname}</stringProp>
-            <stringProp name="port">${port}</stringProp>
-            <stringProp name="path">/daytrader/marketsummary</stringProp>
-            <stringProp name="readTimeout">60000</stringProp>
-          </eu.luminis.jmeter.wssampler.OpenWebSocketSampler>
-          <hashTree/>
-        </hashTree>
         <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="Random Controller" enabled="true">
           <intProp name="InterleaveControl.style">1</intProp>
         </RandomController>
@@ -1507,6 +1496,14 @@
               </ConstantTimer>
               <hashTree/>
             </hashTree>
+            <eu.luminis.jmeter.wssampler.OpenWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.OpenWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.OpenWebSocketSampler" testname="WS2 Open Connection" enabled="true">
+              <boolProp name="TLS">false</boolProp>
+              <stringProp name="server">${hostname}</stringProp>
+              <stringProp name="port">${port}</stringProp>
+              <stringProp name="path">/daytrader/marketsummary</stringProp>
+              <stringProp name="readTimeout">60000</stringProp>
+            </eu.luminis.jmeter.wssampler.OpenWebSocketSampler>
+            <hashTree/>
             <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller" enabled="true">
               <stringProp name="WhileController.condition">${loop}</stringProp>
             </WhileController>
