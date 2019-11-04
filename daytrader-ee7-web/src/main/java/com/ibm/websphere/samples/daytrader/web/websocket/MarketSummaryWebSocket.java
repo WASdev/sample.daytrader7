@@ -49,7 +49,6 @@ import com.ibm.websphere.samples.daytrader.util.WebSocketJMSMessage;
 public class MarketSummaryWebSocket {
 
 	private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
-    private Session currentSession = null;   
     private final CountDownLatch latch = new CountDownLatch(1);
 
     @OnOpen
@@ -59,12 +58,11 @@ public class MarketSummaryWebSocket {
         }
 
         sessions.add(session);
-        currentSession = session;
         latch.countDown();
     } 
     
     @OnMessage
-    public void sendMarketSummary(ActionMessage message) {
+    public void sendMarketSummary(ActionMessage message, Session currentSession) {
 
         String action = message.getDecodedAction();
         
@@ -106,7 +104,7 @@ public class MarketSummaryWebSocket {
     }
 
     @OnError
-    public void onError(Throwable t) {
+    public void onError(Throwable t, Session currentSession) {
         if (Log.doTrace()) {
             Log.trace("MarketSummaryWebSocket:onError -- session -->" + currentSession + "<--");
         }
