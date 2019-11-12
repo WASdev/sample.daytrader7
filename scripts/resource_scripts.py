@@ -1464,7 +1464,7 @@ def installApp ( appName, ear, deployejb, deployws, defaultBindings, earMetaData
 			parms += " -nodeployws"
 		#endElse
 		if (defaultBindings == "true"):
-			parms += " -usedefaultbindings"
+			parms += " -usedefaultbindings -defaultbinding.ee.defaults"
 		#endIf
 		if (earMetaData == "true"):
 			parms += " -useMetaDataFromBinary"
