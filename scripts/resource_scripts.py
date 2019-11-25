@@ -277,7 +277,7 @@ def createJDBCProvider (provider, XA, scopeId, path, nativePath):
 	elif (provider == "DB2 for zOS Local"):
 		name = "DB2 for zOS Local JDBC Provider Only (RRS)"
 	elif (provider == "Derby"):
-		name = "Derby JDBC Provider"
+		name = "Derby JDBC Provider Only"
 		if (XA == "true"):
 			name = "Derby JDBC Provider Only (XA)"
 		#endIf
@@ -402,7 +402,7 @@ def createDatasource (datasourceName, jndiName, stmtCacheSz, authAliasName, prov
 					"DB2 Universal JDBC Driver Provider Only (XA)":"DB2 Universal JDBC Driver XA DataSource",
 					"DB2 Universal JDBC Driver Provider Only":"DB2 Universal JDBC Driver DataSource",
 					"DB2 for zOS Local JDBC Provider Only (RRS)":"DB2 for zOS Local JDBC Driver DataSource (RRS)",
-					"Derby JDBC Provider Only":"Derby JDBC Driver DataSource",
+					"Derby JDBC Provider Only":"Derby JDBC Driver DataSource 40",
 					"Derby JDBC Provider Only (XA)":"Derby JDBC Driver XA DataSource",
 					"Oracle JDBC Driver Provider Only (XA)":"Oracle JDBC Driver XA DataSource",
 					"Oracle JDBC Driver Provider Only":"Oracle JDBC Driver DataSource",
