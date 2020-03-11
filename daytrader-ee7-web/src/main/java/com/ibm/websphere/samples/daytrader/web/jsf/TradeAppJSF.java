@@ -177,11 +177,6 @@ public class TradeAppJSF implements Serializable {
         }
 
         HttpSession session = (HttpSession) facesExternalContext.getSession(false);
-
-        if (session != null) {
-            session.invalidate();
-        }
-        
         // Added to actually remove a user from the authentication cache
         try {
             ((HttpServletRequest) facesExternalContext.getRequest()).logout();

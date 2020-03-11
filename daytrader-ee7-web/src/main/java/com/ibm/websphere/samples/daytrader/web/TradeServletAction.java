@@ -390,13 +390,20 @@ public class TradeServletAction {
             // set the status_code to 500
             throw new ServletException("TradeServletAction.doLogout(...)" + "exception logging out user " + userID, e);
         }
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(false);
         if (session != null) {
-            session.invalidate();
+            // Added to actually remove a user from the authentication cache
+            try {
+                req.logout();
+            } catch (Exception e) {
+                Log.error("logging out user:"+userID);
+                Log.error("sessionId:"+session.getId());
+                Log.error("sessionAttrNames:"+session.getAttributeNames().toString());
+                Log.error("uidBean:" + session.getAttribute("uidBean").toString());
+                Log.error("sessionCreationDate:" + session.getAttribute("sessionCreationDate").toString());
+            }
         }
-        
-        // Added to actually remove a user from the authentication cache
-        req.logout();
+
 
         Object o = req.getAttribute("TSS-RecreateSessionInLogout");
         if (o != null && ((Boolean) o).equals(Boolean.TRUE)) {
@@ -406,6 +413,7 @@ public class TradeServletAction {
             // to create a new session in this request may be lost
             // This is to handle only the TradeScenarioServlet case
             session = req.getSession(true);
+            Log.log("TradeScenarioServlet sessionId:"+session.getId());
         }
         requestDispatch(ctx, req, resp, userID, TradeConfig.getPage(TradeConfig.WELCOME_PAGE));
     }
