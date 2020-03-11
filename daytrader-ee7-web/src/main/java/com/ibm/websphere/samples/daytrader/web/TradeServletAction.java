@@ -401,6 +401,7 @@ public class TradeServletAction {
                 Log.error("sessionAttrNames:"+session.getAttributeNames().toString());
                 Log.error("uidBean:" + session.getAttribute("uidBean").toString());
                 Log.error("sessionCreationDate:" + session.getAttribute("sessionCreationDate").toString());
+                throw new ServletException("Logout Error:"+userID,e);
             }
         }
 
