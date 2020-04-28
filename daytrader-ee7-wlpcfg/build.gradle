@@ -1,6 +1,8 @@
-task clean << {
-    ant.delete(includeemptydirs: 'true') {
-        fileset(dir: 'servers', includes: '**/logs/**, **/apps/*, **/workarea/**')
-        fileset(dir: 'shared/resources', includes: '**/data/**, **/Daytrader7SampleDerbyLibs/*')
+task clean {
+    doLast {
+        ant.delete(includeemptydirs: 'true') {
+            fileset(dir: 'servers', includes: '**/logs/**, **/apps/*, **/workarea/**')
+            fileset(dir: 'shared/resources', includes: '**/data/**, **/Daytrader7SampleDerbyLibs/*')
+        }
     }
 }
