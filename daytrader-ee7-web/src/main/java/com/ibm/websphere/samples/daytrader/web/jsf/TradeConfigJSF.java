@@ -236,6 +236,8 @@ public class TradeConfigJSF {
                 result = result + "TradeBuildDB: **** Database Product detected: " + dbProductName + " ****<br/>";
                 if (dbProductName.startsWith("DB2/")) { // if db is DB2
                     ddlFile = "/dbscripts/db2/Table.ddl";
+                } else if (dbProductName.startsWith("DB2 UDB for AS/400")) { //if db is DB2 on IBM i
+                  ddlFile = "/dbscripts/db2i/Table.ddl";
                 } else if (dbProductName.startsWith("Apache Derby")) { //if db is Derby
                     ddlFile = "/dbscripts/derby/Table.ddl";
                 } else if (dbProductName.startsWith("Oracle")) { // if the Db is Oracle

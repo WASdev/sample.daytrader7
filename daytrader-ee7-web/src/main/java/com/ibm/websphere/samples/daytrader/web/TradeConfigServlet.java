@@ -316,11 +316,13 @@ public class TradeConfigServlet extends HttpServlet {
                     resp.getWriter().println("<BR>TradeBuildDB: **** Database Product detected: " + dbProductName + " ****</BR>");
                     if (dbProductName.startsWith("DB2/")) {// if db is DB2
                         ddlFile = "/dbscripts/db2/Table.ddl";
-                    } else if (dbProductName.startsWith("Apache Derby")) { //if db is Derby
+                    } else if (dbProductName.startsWith("DB2 UDB for AS/400")) { //if db is DB2 on IBM i
+                        ddlFile = "/dbscripts/db2i/Table.ddl";
+                    }  else if (dbProductName.startsWith("Apache Derby")) { //if db is Derby
                         ddlFile = "/dbscripts/derby/Table.ddl";
                     } else if (dbProductName.startsWith("Oracle")) { // if the Db is Oracle
                         ddlFile = "/dbscripts/oracle/Table.ddl";
-                    } else {// Unsupported "Other" Database
+                    } else {// Unsupported "Other" Database, try derby ddl
                         ddlFile = "/dbscripts/derby/Table.ddl";
                         resp.getWriter().println("<BR>TradeBuildDB: **** This Database is unsupported/untested use at your own risk ****</BR>");
                     }
