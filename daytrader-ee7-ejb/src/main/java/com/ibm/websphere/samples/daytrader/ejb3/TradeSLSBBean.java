@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corporation 2015.
+ * (C) Copyright IBM Corporation 2015, 2021
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-//import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -365,9 +364,16 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<OrderDataBean> criteriaQuery = criteriaBuilder.createQuery(OrderDataBean.class);
             Root<OrderDataBean> orders = criteriaQuery.from(OrderDataBean.class);
-            criteriaQuery.where(criteriaBuilder.equal(orders.get("orderStatus"), "closed"),criteriaBuilder.equal(orders.get("account").get("profile").get("userID"),userID));
             criteriaQuery.select(orders);
+            criteriaQuery.where(
+              criteriaBuilder.equal(orders.get("orderStatus"), 
+              criteriaBuilder.parameter(String.class, "p_status")),
+              criteriaBuilder.equal(orders.get("account").get("profile").get("userID"),
+              criteriaBuilder.parameter(String.class, "p_userid")));
+            
             TypedQuery<OrderDataBean> q = entityManager.createQuery(criteriaQuery);
+            q.setParameter("p_status", "closed");
+            q.setParameter("p_userid", userID);
             List<OrderDataBean> results = q.getResultList();
             
             Iterator<OrderDataBean> itr = results.iterator();
@@ -471,9 +477,13 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<HoldingDataBean> criteriaQuery = criteriaBuilder.createQuery(HoldingDataBean.class);
         Root<HoldingDataBean> holdings = criteriaQuery.from(HoldingDataBean.class);
-        criteriaQuery.where(criteriaBuilder.equal(holdings.get("account").get("profile").get("userID"), userID));
+        criteriaQuery.where(
+          criteriaBuilder.equal(holdings.get("account").get("profile").get("userID"), 
+          criteriaBuilder.parameter(String.class, "p_userid")));
         criteriaQuery.select(holdings);
+
         TypedQuery<HoldingDataBean> typedQuery = entityManager.createQuery(criteriaQuery);
+        typedQuery.setParameter("p_userid", userID);
                
         return typedQuery.getResultList();
     }
@@ -535,7 +545,7 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
         if (profile == null) {
             throw new EJBException("No such user: " + userID);
         }
-        entityManager.merge(profile);
+        
         AccountDataBean account = profile.getAccount();
 
         if (Log.doTrace()) {
@@ -635,9 +645,6 @@ public class TradeSLSBBean implements TradeSLSBRemote, TradeSLSBLocal {
     	} catch (Exception e) {
     		 throw new EJBException(e.getMessage(), e); // pass the exception
     	}
-        
-        
-        
     }
 
     private OrderDataBean createOrder(AccountDataBean account, QuoteDataBean quote, HoldingDataBean holding, String orderType, double quantity) {
