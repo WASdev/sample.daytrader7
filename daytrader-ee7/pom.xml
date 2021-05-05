@@ -2,11 +2,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>net.wasdev.wlp.sample</groupId>
-        <artifactId>daytrader7</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-	
+      <groupId>net.wasdev.wlp.sample</groupId>
+      <artifactId>daytrader7</artifactId>
+      <version>1.0-SNAPSHOT</version>
+  </parent>
    
 	<name>WAS Liberty Sample - Java EE7 Benchmark Sample - EAR</name>
 
@@ -15,6 +14,16 @@
         This is needed to run the tests -->
         <libertyTestPort>9082</libertyTestPort>
         <skipFVT>false</skipFVT>
+          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+          <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+          <maven.compiler.source>1.8</maven.compiler.source>
+          <maven.compiler.target>1.8</maven.compiler.target>
+          <!-- Derby library -->
+          <version.derby>10.14.2.0</version.derby>
+          <derby.path>${user.home}/.m2/repository/org/apache/derby/derby</derby.path>
+          <!-- Liberty configuration -->
+          <testServerHttpPort>9080</testServerHttpPort>
+          <testServerHttpsPort>9443</testServerHttpsPort>
     </properties>
 	
     <packaging>ear</packaging>
@@ -26,7 +35,7 @@
             <groupId>net.wasdev.wlp.sample</groupId>
             <artifactId>daytrader-ee7-ejb</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
+            <type>ejb</type>
         </dependency>
 	    <dependency>
             <groupId>net.wasdev.wlp.sample</groupId>
@@ -34,203 +43,92 @@
             <version>1.0-SNAPSHOT</version>
             <type>war</type>
         </dependency>
+        <!-- Derby from https://mvnrepository.com/artifact/org.apache.derby/derby -->
+    
+      <dependency>
+        <groupId>org.apache.derby</groupId>
+        <artifactId>derby</artifactId>
+        <version>${version.derby}</version>
+        <scope>test</scope>
+     </dependency>
     </dependencies>
 
 	<build>
+    <finalName>${project.artifactId}</finalName>
         <plugins>
 	        <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-ear-plugin</artifactId>
-                <configuration>
-                    <version>6</version>
-                    <fileNameMapping>no-version</fileNameMapping>
-                </configuration>
-	        </plugin>
-        
-	        <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-						<id>copy-resources1</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>../daytrader-ee7-wlpcfg/shared/resources/Daytrader7SampleDerbyLibs</outputDirectory>
-							<stripVersion>false</stripVersion>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.apache.derby</groupId>
-                                    <artifactId>derby</artifactId>
-                                    <version>10.10.1.1</version>
-                                    <type>jar</type>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-					 <execution>
-						 <id>copy-resources2</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>../daytrader-ee7-wlpcfg/servers/daytrader7Sample/apps</outputDirectory>
-                            <stripVersion>true</stripVersion>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>net.wasdev.wlp.sample</groupId>
-                                    <artifactId>daytrader-ee7</artifactId>
-                                    <version>1.0-SNAPSHOT</version>
-                                    <type>ear</type>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-			<!-- Enable liberty-maven plugin so that we can start and stop a server before running tests -->
-            <plugin>
-                <groupId>net.wasdev.wlp.maven.plugins</groupId>
-                <artifactId>liberty-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <id>start-server</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>start-server</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipFVT}</skip>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>stop-server</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop-server</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipFVT}</skip>
-                        </configuration>
-                    </execution>
-                </executions>
-                <configuration>
-                    <serverName>daytrader7Sample</serverName>
-                    <userDirectory>${basedir}/../daytrader-ee7-wlpcfg</userDirectory>
-                </configuration>
-            </plugin>
-            <!-- Plugin to run functional tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.18.1</version>
-                <executions>
-                    <execution>
-                        <phase>integration-test</phase>
-                        <id>integration-test</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                        <configuration>
-                            <includes>
-                                <include>**/fvt/**</include>
-                            </includes>
-                            <excludes>
-                                <exclude>**/unit/**</exclude>
-                            </excludes>
-                            <systemPropertyVariables>
-                                <liberty.test.port>${libertyTestPort}</liberty.test.port>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>verify-tests</id>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <skip>${skipFVT}</skip>
-                    <summaryFile>${project.build.directory}/test-reports/fvt/failsafe-summary.xml</summaryFile>
-                    <reportsDirectory>${project.build.directory}/test-reports/fvt</reportsDirectory>
-                </configuration>
-            </plugin>
-            <!-- Plugin to run unit tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
-                <executions>
-                    <execution>
-                        <phase>test</phase>
-                        <id>default-test</id>
-                        <configuration>
-                            <includes>
-                                <include>**/unit/**</include>
-                            </includes>
-                            <excludes>
-                                <exclude>**/fvt/**</exclude>
-                            </excludes>
-                            <reportsDirectory>${project.build.directory}/test-reports/unit</reportsDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
-    <profiles>
-        <!-- Profile to download licensed liberty from the Liberty repository.
-             This profile is active by default. -->
-        <profile>
-            <id>wlp-download</id>
-            <activation>
-                <property>
-                    <name>!wlp.install.dir</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>net.wasdev.wlp.maven.plugins</groupId>
-                        <artifactId>liberty-maven-plugin</artifactId>
-                        <configuration>
-                            <install>
-                                <type>javaee7</type>
-                            </install>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <!-- Profile to use an existing liberty installation. Activate this
-             profile by providing the following property: -Dwlp.install.dir=<value> -->
-        <profile>
-            <id>wlp-local</id>
-            <activation>
-                <property>
-                    <name>wlp.install.dir</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>net.wasdev.wlp.maven.plugins</groupId>
-                        <artifactId>liberty-maven-plugin</artifactId>
-                        <configuration>
-                            <installDirectory>${wlp.install.dir}</installDirectory>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-ear-plugin</artifactId>
+            <version>3.0.2</version>
+            <configuration>
+                <version>7</version>
+                <modules>
+                    <webModule>
+                        <groupId>net.wasdev.wlp.sample</groupId>
+                        <artifactId>daytrader-ee7-web</artifactId>
+                        <uri>/daytrader-ee7-web.war</uri>>
+                        <contextRoot>/daytrader</contextRoot>
+                    </webModule>
+                    <ejbModule>
+                        <groupId>net.wasdev.wlp.sample</groupId>
+                        <artifactId>daytrader-ee7-ejb</artifactId>
+                        <uri>/daytrader-ee7-ejb.jar</uri>
+                    </ejbModule>
+                </modules>
+            </configuration>
+        </plugin>
+         <plugin>
+            <groupId>io.openliberty.tools</groupId>
+            <artifactId>liberty-maven-plugin</artifactId>
+            <version>3.3.4</version>
+            <configuration>
+              <bootstrapProperties>
+                <default.http.port>${testServerHttpPort}</default.http.port>
+                <default.https.port>${testServerHttpsPort}</default.https.port>
+              </bootstrapProperties>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.2</version>
+            <executions>
+               <execution>
+                  <id>copy-derby-dependency</id>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>copy-dependencies</goal>
+                  </goals>
+                  <configuration>
+                     <includeArtifactIds>derby</includeArtifactIds>
+                     <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources/DerbyLibs/</outputDirectory>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.6</version>
+            <executions>
+               <execution>
+                  <id>copy-resources</id>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>copy-resources</goal>
+                  </goals>
+                  <configuration>
+                     <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources/data</outputDirectory>
+                     <resources>
+                        <resource>
+                           <directory>resources/data</directory>
+                           <filtering>false</filtering>
+                        </resource>
+                     </resources>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
 
 </project>
