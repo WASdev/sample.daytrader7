@@ -9,14 +9,19 @@ This sample contains the DayTrader 7 benchmark, which is an application built ar
 
 DayTrader is an end-to-end benchmark and performance sample application. It provides a real world Java EE workload. DayTrader's new design spans Java EE 7, including the new WebSockets specification. Other Java EE features include JSPs, Servlets, EJBs, JPA, JDBC, JSF, CDI, Bean Validation, JSON, JMS, MDBs, and transactions (synchronous and asynchronous/2-phase commit).
 
-This sample can be installed onto WAS Liberty runtime versions 8.5.5.6 and later.
+This sample can be installed onto WAS Liberty runtime versions 8.5.5.6 and later. A prebuilt derby database is provided in resources/data
 
-## Getting Started
+To run this sample, first [download](https://github.com/WASdev/sample.daytrader7/archive/master.zip) or clone this repo - to clone:
+```
+git clone git@github.com:WASdev/sample.daytrader7.git
+```
 
-Browse the code to see what it does, or build and run it yourself:
-* [Building and running on the command line](/docs/Using-cmd-line.md)
-* [Building and running using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
-* [Downloading WAS Liberty](/docs/Downloading-WAS-Liberty.md)
+From inside the sample.daytrader7 directory, build and start the application in Open Liberty with the following command:
+```
+mvn package
+cd daytrader-ee7
+mvn liberty:run
+```
 
 Once the server has been started, go to [http://localhost:9082/daytrader](http://localhost:9082/daytrader) to interact with the sample.
 
