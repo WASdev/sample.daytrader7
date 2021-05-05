@@ -4,12 +4,6 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>net.wasdev.maven.parent</groupId>
-        <artifactId>java7-parent</artifactId>
-        <version>1.3</version>
-    </parent>
-
     <groupId>net.wasdev.wlp.sample</groupId>
     <artifactId>daytrader7</artifactId>
     <packaging>pom</packaging>
@@ -19,23 +13,14 @@
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
-            <url>https://raw.github.com/WASdev/sample.async.jaxrs/master/LICENSE</url>
+            <url>https://raw.github.com/WASdev/sample.daytrader7/master/LICENSE</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
-
-    <!--<scm>
-        <connection>scm:git:git@github.com:WASdev/sample.async.jaxrs.git</connection>
-        <developerConnection>scm:git@github.com:WASdev/sample.async.jaxrs.git</developerConnection>
-        <url>git@github.com:WASdev/sample.async.jaxrss.git</url>
-    </scm>-->
-
+    
     <modules>
-        
 		<module>daytrader-ee7-ejb</module>
 		<module>daytrader-ee7-web</module>
 		<module>daytrader-ee7</module>
-        <module>daytrader-ee7-wlpcfg</module>
     </modules>
-
 </project>
