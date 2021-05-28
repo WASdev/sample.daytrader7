@@ -18,7 +18,7 @@ git clone git@github.com:WASdev/sample.daytrader7.git
 
 From inside the sample.daytrader7 directory, build and start the application in Open Liberty with the following command:
 ```
-mvn package
+mvn install
 cd daytrader-ee7
 mvn liberty:run
 ```
