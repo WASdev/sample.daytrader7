@@ -20,7 +20,7 @@ From inside the sample.daytrader7 directory, build the application:
 mvn clean install
 ```
 * Copy daytrader-ee7/target/daytrader-ee7.ear to <OPENLIBERTY_HOME>/usr/servers/defaultServer/apps
-* Copy daytrader-ee7/src/main/liberty/config/server.xml_db2 to <OPENLIBERTY_HOME>/usr/servers/defaultServer/server.xml  (overwrite)
+* Copy daytrader-ee7/src/main/liberty/config/server_db2.xml to <OPENLIBERTY_HOME>/usr/servers/defaultServer/server.xml  (overwrite)
 * Copy db2 jars from the DB2 Machine to <OPENLIBERTY_HOME>/usr/shared/db2jars
 ```
 db2jcc4.jar
