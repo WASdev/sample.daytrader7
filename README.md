@@ -25,6 +25,11 @@ mvn liberty:run
 
 Once the server has been started, go to [http://localhost:9082/daytrader](http://localhost:9082/daytrader) to interact with the sample.
 
+### To containerize the application with DB2, you can run command 
+```
+docker build -t sample-daytrader7 -f Containerfile_db2 .
+```
+
 ## Notice
 
 © Copyright IBM Corporation 2015.
