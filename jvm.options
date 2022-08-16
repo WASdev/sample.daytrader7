@@ -1,0 +1,4 @@
+-verbose:gc
+-Xdump:heap
+-Xaggressive
+-Xverbosegclog:/logs/verbosegc.log,200,10000
