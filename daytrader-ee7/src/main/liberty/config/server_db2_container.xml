@@ -13,6 +13,8 @@
     <feature>jsonp-1.0</feature>
     <feature>beanValidation-1.1</feature>
     <feature>localConnector-1.0</feature>
+    <feature>mpHealth-1.0</feature>
+    <feature>transportSecurity-1.0</feature>
   </featureManager>
 
   <!-- allow reuse of 'busy' ports for fast server recycling on linux (where ports remain blocked for up to 2 mins after server stops) ${tradelite.http.port} set in bootstrap.properties -->
