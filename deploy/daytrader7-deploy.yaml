@@ -5,7 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
-  applicationImage: 'dguinan/sample.daytrader7.gitops:latest'
+  applicationImage: 'docker.io/dguinan/sample-daytrader7:latest'
   route:
     path: /daytrader
   expose: true
