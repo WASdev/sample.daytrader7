@@ -1,0 +1,20 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: trade-db2
+  namespace: db2
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    app: trade-db2
+spec:
+  ports:
+    - name: 50000-tcp
+      protocol: TCP
+      port: 50000
+      targetPort: 50000
+  selector:
+    app: trade-db2
+    deployment: trade-db2
+  type: ClusterIP
+  sessionAffinity: None
