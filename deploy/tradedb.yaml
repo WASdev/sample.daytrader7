@@ -2,7 +2,6 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: trade-db2
-  namespace: db2
   annotations:
     argocd.argoproj.io/sync-wave: "1"
   labels:
@@ -45,3 +44,5 @@ spec:
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
       schedulerName: default-scheduler
+      serviceAccountName: mysvcacct
+      serviceAccount: mysvcacct
