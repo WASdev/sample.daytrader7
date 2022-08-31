@@ -44,6 +44,4 @@ spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
-      serviceAccountName: mysvcacct
-      serviceAccount: mysvcacct
       schedulerName: default-scheduler
