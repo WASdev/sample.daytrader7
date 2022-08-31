@@ -8,8 +8,6 @@ spec:
   applicationImage: 'dguinan/sample.daytrader7.gitops:latest'
   route:
     path: /daytrader
-    termination: edge
-    insecureEdgeTerminationPolicy: Redirect
   expose: true
   service:
     portName: liveness-port
@@ -36,7 +34,7 @@ spec:
       periodSeconds: 10
   env:
     - name: tradeDbHost
-      value: trade-db2.ol-dt7-db2
+      value: trade-db2
     - name: tradeDbPort
       value: "50000"
     - name: tradeDbName
