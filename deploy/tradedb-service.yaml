@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: trade-db2
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "2"
   labels:
     app: trade-db2
 spec:
