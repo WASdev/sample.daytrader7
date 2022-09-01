@@ -1,0 +1,55 @@
+apiVersion: apps.openliberty.io/v1beta2
+kind: OpenLibertyApplication
+metadata:
+  name: daytrader7
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  applicationImage: 'docker.io/dguinan/sample-daytrader7:latest'
+  route:
+    path: /daytrader
+  expose: true
+  service:
+    portName: liveness-port
+    port: 9082
+    type: ClusterIP
+  probes:
+    startup:
+      httpGet:
+        path: /health
+        port: liveness-port
+      failureThreshold: 10
+      periodSeconds: 10
+    liveness:
+      httpGet:
+        path: /health
+        port: liveness-port
+      failureThreshold: 5
+      periodSeconds: 10
+    readiness:
+      httpGet:
+        path: /daytrader
+        port: liveness-port
+      failureThreshold: 5
+      periodSeconds: 10
+  env:
+    - name: tradeDbHost
+      value: trade-db2
+    - name: tradeDbPort
+      value: "50000"
+    - name: tradeDbName
+      value: TRADEDB
+    - name: dbUser
+      value: db2inst1
+    - name: dbPass
+      value: passw0rd
+    - name: traceString
+      value: " "
+  pullPolicy: Always
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1024Mi
+    limits:
+      cpu: 500m
+      memory: 2048Mi

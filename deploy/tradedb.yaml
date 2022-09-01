@@ -1,0 +1,48 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: trade-db2
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    app: trade-db2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trade-db2
+      deployment: trade-db2
+  template:
+    metadata:
+      labels:
+        app: trade-db2
+        deployment: trade-db2
+    spec:
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: trade-db2
+          env:
+            - name: DB2INST1_PASSWORD
+              value: passw0rd
+            - name: LICENSE
+              value: accept
+            - name: DBNAME
+              value: tradedb
+          securityContext:
+            capabilities:
+            privileged: true
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: true
+          ports:
+            - containerPort: 50000
+              protocol: TCP
+          imagePullPolicy: Always
+          terminationMessagePolicy: File
+          image: docker.io/tamdocker/trade7db:latest
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      schedulerName: default-scheduler
+      serviceAccountName: mysvcacct
+      serviceAccount: mysvcacct
