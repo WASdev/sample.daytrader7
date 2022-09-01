@@ -3,7 +3,7 @@ kind: OpenLibertyApplication
 metadata:
   name: daytrader7
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   applicationImage: 'docker.io/dguinan/sample-daytrader7:latest'
   route:
