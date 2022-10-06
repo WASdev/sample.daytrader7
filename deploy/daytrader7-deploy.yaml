@@ -21,7 +21,7 @@ spec:
       nginx.ingress.kubernetes.io/affinity: "cookie"
       nginx.ingress.kubernetes.io/session-cookie-name: "route"
       nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
-    host: svtaks.green-chesterfield.com
+    host: svtdemo.green-chesterfield.com
     certificateSecretRef: tls-secret
     path: /daytrader
     pathType: Prefix    
