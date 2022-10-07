@@ -27,8 +27,8 @@ spec:
               value: passw0rd
             - name: LICENSE
               value: accept
-            - name: DBNAME
-              value: tradedb
+            - name: APP
+              value: daytrader7
           securityContext:
             capabilities:
             privileged: true
