@@ -10,7 +10,7 @@ spec:
     edition: IBM WebSphere Application Server
     productEntitlementSource: Standalone
     metric: Virtual Processor Core (VPC)
-    applicationImage: 'docker.io/dguinan/sample-daytrader7:latest'
+  applicationImage: 'docker.io/dguinan/sample-daytrader7:latest'
   pullPolicy: Always
   replicas: 1
   route:
