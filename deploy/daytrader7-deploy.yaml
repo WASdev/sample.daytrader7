@@ -43,7 +43,10 @@ spec:
     - name: dbUser
       value: db2inst1
     - name: dbPass
-      value: passw0rd
+      valueFrom:
+        secretKeyRef:
+          name: db-credential
+          key: dbpw
   resources:
     requests:
       cpu: 500m
