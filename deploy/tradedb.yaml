@@ -30,8 +30,8 @@ spec:
                   key: dbpw
             - name: LICENSE
               value: accept
-            - name: DBNAME
-              value: tradedb
+            #- name: DBNAME
+            #  value: tradedb
           securityContext:
             capabilities:
             privileged: true
