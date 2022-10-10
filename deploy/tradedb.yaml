@@ -24,7 +24,10 @@ spec:
           name: trade-db2
           env:
             - name: DB2INST1_PASSWORD
-              value: passw0rd
+              valueFrom:
+                secretKeyRef:
+                  name: db-credential
+                  key: dbpw
             - name: LICENSE
               value: accept
             - name: APP
