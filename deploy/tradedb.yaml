@@ -30,8 +30,8 @@ spec:
                   key: dbpw
             - name: LICENSE
               value: accept
-            - name: APP
-              value: daytrader7
+            - name: DBNAME
+              value: tradedb
           securityContext:
             capabilities:
             privileged: true
@@ -42,7 +42,7 @@ spec:
               protocol: TCP
           imagePullPolicy: Always
           terminationMessagePolicy: File
-          image: docker.io/tamdocker/trade7db:latest
+          image: docker.io/tamdocker/trade7db2:latest
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
