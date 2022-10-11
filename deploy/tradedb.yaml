@@ -40,7 +40,7 @@ spec:
               protocol: TCP
           imagePullPolicy: Always
           terminationMessagePolicy: File
-          image: docker.io/tamdocker/trade7db2:latest
+          image: docker.io/tamdocker/trade7db:latest
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
