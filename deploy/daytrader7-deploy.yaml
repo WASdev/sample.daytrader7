@@ -42,9 +42,10 @@ spec:
     - name: dbUser
       value: db2inst1
     - name: dbPass
-      value: passw0rd
-    - name: traceString
-      value: " "
+      valueFrom:
+        secretKeyRef:
+          name: db-credential
+          key: dbpw
   pullPolicy: Always
   resources:
     requests:
