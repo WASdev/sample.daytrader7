@@ -1,38 +1,37 @@
-apiVersion: liberty.websphere.ibm.com/v1
-kind: WebSphereLibertyApplication
+apiVersion: apps.openliberty.io/v1beta2
+kind: OpenLibertyApplication
 metadata:
   name: daytrader7
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
-  license:
-    accept: true
-    edition: IBM WebSphere Application Server
-    productEntitlementSource: Standalone
-    metric: Virtual Processor Core (VPC)
   applicationImage: 'docker.io/dguinan/sample-daytrader7:latest'
-  pullPolicy: Always
-  replicas: 1
   route:
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      cert-manager.io/cluster-issuer: letsencrypt
-      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-      nginx.ingress.kubernetes.io/affinity: "cookie"
-      nginx.ingress.kubernetes.io/session-cookie-name: "route"
-      nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
-    host: svtdemo.green-chesterfield.com
-    certificateSecretRef: tls-secret
     path: /daytrader
-    pathType: Prefix    
   expose: true
   service:
-    port: 9443
+    portName: liveness-port
+    port: 9082
     type: ClusterIP
   probes:
-    startup: {}
-    liveness: {}
-    readiness: {}
+    startup:
+      httpGet:
+        path: /health
+        port: liveness-port
+      failureThreshold: 10
+      periodSeconds: 10
+    liveness:
+      httpGet:
+        path: /health
+        port: liveness-port
+      failureThreshold: 5
+      periodSeconds: 10
+    readiness:
+      httpGet:
+        path: /daytrader
+        port: liveness-port
+      failureThreshold: 5
+      periodSeconds: 10
   env:
     - name: tradeDbHost
       value: trade-db2
@@ -47,6 +46,7 @@ spec:
         secretKeyRef:
           name: db-credential
           key: dbpw
+  pullPolicy: Always
   resources:
     requests:
       cpu: 500m
