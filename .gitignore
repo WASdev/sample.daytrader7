@@ -6,3 +6,24 @@
 .DS_Store
 /build/
 /.gradle/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Rust analyzer configuration
+/rust-project.json
+
