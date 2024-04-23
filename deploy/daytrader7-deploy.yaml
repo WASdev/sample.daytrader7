@@ -8,6 +8,7 @@ spec:
   applicationImage: 'docker.io/dguinan/sample-daytrader7:latest'
   route:
     path: /daytrader
+    termination: edge
   expose: true
   service:
     portName: liveness-port
@@ -54,5 +55,3 @@ spec:
     limits:
       cpu: 500m
       memory: 2Gi
-  route:
-    termination: edge
