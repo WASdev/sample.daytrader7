@@ -1,4 +1,4 @@
-apiVersion: apps.openliberty.io/v1beta2
+apiVersion: apps.openliberty.io/v1
 kind: OpenLibertyApplication
 metadata:
   name: daytrader7
