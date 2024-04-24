@@ -14,24 +14,9 @@ spec:
     port: 9443
     type: ClusterIP
   probes:
-    startup:
-      httpGet:
-        path: /health
-        port: liveness-port
-      failureThreshold: 10
-      periodSeconds: 10
-    liveness:
-      httpGet:
-        path: /health
-        port: liveness-port
-      failureThreshold: 5
-      periodSeconds: 10
-    readiness:
-      httpGet:
-        path: /daytrader
-        port: liveness-port
-      failureThreshold: 5
-      periodSeconds: 10
+    startup: {}
+    liveness: {}
+    readiness: {}
   env:
     - name: tradeDbHost
       value: trade-db2
