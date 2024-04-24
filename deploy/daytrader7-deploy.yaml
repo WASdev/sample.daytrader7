@@ -8,11 +8,10 @@ spec:
   applicationImage: 'docker.io/dguinan/sample-daytrader7:latest'
   route:
     path: /daytrader
-    termination: edge
   expose: true
   service:
     portName: liveness-port
-    port: 9082
+    port: 9443
     type: ClusterIP
   probes:
     startup:
