@@ -40,7 +40,7 @@ import com.ibm.websphere.samples.daytrader.util.TradeConfig;
  * numbers.
  *
  */
-@WebServlet(name = "ejb3.PingServlet2SessionRemote", urlPatterns = { "/ejb3/PingServlet2SessionRemote" })
+@WebServlet(name = "ejb3.PingServlet2SessionRemote", urlPatterns = { "/ejb3/PingServlet2Session" })
 public class PingServlet2SessionRemote extends HttpServlet {
 
     private static final long serialVersionUID = -6328388347808212784L;

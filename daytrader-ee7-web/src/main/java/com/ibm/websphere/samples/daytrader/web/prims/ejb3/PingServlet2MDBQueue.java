@@ -54,7 +54,7 @@ public class PingServlet2MDBQueue extends HttpServlet {
     @Resource(name = "jms/QueueConnectionFactory")
     private ConnectionFactory queueConnectionFactory;
 
-    @Resource(name = "jms/BrokerQueue")
+    @Resource(name = "jms/TradeBrokerQueue")
     private Queue tradeBrokerQueue;
 
     @Override

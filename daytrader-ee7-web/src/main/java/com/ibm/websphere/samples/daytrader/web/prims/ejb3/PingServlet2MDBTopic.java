@@ -54,7 +54,7 @@ public class PingServlet2MDBTopic extends HttpServlet {
     @Resource(name = "jms/TopicConnectionFactory")
     private ConnectionFactory topicConnectionFactory;
 
-    @Resource(name = "jms/StreamerTopic")
+    @Resource(name = "jms/TradeStreamerTopic")
     private Topic tradeStreamerTopic;
 
     @Override

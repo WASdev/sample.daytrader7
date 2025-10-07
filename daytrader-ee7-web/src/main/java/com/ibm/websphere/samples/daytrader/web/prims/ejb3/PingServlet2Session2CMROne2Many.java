@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBBean;
+import com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal;
 import com.ibm.websphere.samples.daytrader.entities.OrderDataBean;
 import com.ibm.websphere.samples.daytrader.util.Log;
 import com.ibm.websphere.samples.daytrader.util.TradeConfig;
@@ -39,7 +39,7 @@ import com.ibm.websphere.samples.daytrader.util.TradeConfig;
  * calling a Session to Entity EJB to get CMR One to One data
  *
  */
-@WebServlet(name = "ejb3.PingServlet2Session2CMR2One2Many", urlPatterns = { "/ejb3/PingServlet2Session2CMR2One2Many" })
+@WebServlet(name = "ejb3.PingServlet2Session2CMR2One2Many", urlPatterns = { "/ejb3/PingServlet2Session2CMROne2Many" })
 public class PingServlet2Session2CMROne2Many extends HttpServlet {
     private static final long serialVersionUID = -8658929449987440032L;
 
@@ -48,7 +48,7 @@ public class PingServlet2Session2CMROne2Many extends HttpServlet {
     private static int hitCount;
 
     @EJB(lookup="java:app/daytrader-ee7-ejb/TradeSLSBBean!com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal")
-    private TradeSLSBBean tradeSLSBLocal;
+    private TradeSLSBLocal tradeSLSBLocal;
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
