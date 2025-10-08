@@ -1552,7 +1552,7 @@ use(groovy.time.TimeCategory) {
               <boolProp name="IfController.useExpression">true</boolProp>
             </IfController>
             <hashTree>
-              <eu.luminis.jmeter.wssampler.CloseWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.CloseWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.CloseWebSocketSampler" testname="WS2 - WebSocket Close" enabled="true">
+              <eu.luminis.jmeter.wssampler.CloseWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.CloseWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.CloseWebSocketSampler" testname="WS2 - WebSocket Close" enabled="false">
                 <stringProp name="statusCode">1000</stringProp>
                 <stringProp name="readTimeout">6000</stringProp>
               </eu.luminis.jmeter.wssampler.CloseWebSocketSampler>
