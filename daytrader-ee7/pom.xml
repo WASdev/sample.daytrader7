@@ -1,91 +1,99 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
 
-    <parent>
+   <parent>
       <groupId>net.wasdev.wlp.sample</groupId>
       <artifactId>daytrader7</artifactId>
       <version>1.0-SNAPSHOT</version>
-  </parent>
-   
-	<name>WAS Liberty Sample - Java EE7 Benchmark Sample - EAR</name>
+   </parent>
 
-    <properties>
-        <!-- Update this to match the port number in the websocketSample server.xml
+   <name>WAS Liberty Sample - Java EE7 Benchmark Sample - EAR</name>
+
+   <properties>
+      <!-- Update this to match the port number in the websocketSample server.xml
         This is needed to run the tests -->
-        <libertyTestPort>9082</libertyTestPort>
-        <skipFVT>false</skipFVT>
-          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-          <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-          <maven.compiler.source>1.8</maven.compiler.source>
-          <maven.compiler.target>1.8</maven.compiler.target>
-          <!-- Derby library -->
-          <version.derby>10.14.2.0</version.derby>
-          <derby.path>${user.home}/.m2/repository/org/apache/derby/derby</derby.path>
-          <!-- Liberty configuration -->
-          <testServerHttpPort>9080</testServerHttpPort>
-          <testServerHttpsPort>9443</testServerHttpsPort>
-    </properties>
-	
-    <packaging>ear</packaging>
-	<artifactId>daytrader-ee7</artifactId>
-	<version>1.0-SNAPSHOT</version>
+      <libertyTestPort>9082</libertyTestPort>
+      <skipFVT>false</skipFVT>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <!-- Derby library -->
+      <version.derby>10.14.2.0</version.derby>
+      <derby.path>${user.home}/.m2/repository/org/apache/derby/derby</derby.path>
+      <!-- Liberty configuration -->
+      <testServerHttpPort>9080</testServerHttpPort>
+      <testServerHttpsPort>9443</testServerHttpsPort>
+   </properties>
 
-	<dependencies>
-        <dependency>
-            <groupId>net.wasdev.wlp.sample</groupId>
-            <artifactId>daytrader-ee7-ejb</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>ejb</type>
-        </dependency>
-	    <dependency>
-            <groupId>net.wasdev.wlp.sample</groupId>
-            <artifactId>daytrader-ee7-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
-        <!-- Derby from https://mvnrepository.com/artifact/org.apache.derby/derby -->
-    
+   <packaging>ear</packaging>
+   <artifactId>daytrader-ee7</artifactId>
+   <version>1.0-SNAPSHOT</version>
+
+   <dependencies>
       <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derby</artifactId>
-        <version>${version.derby}</version>
-        <scope>test</scope>
-     </dependency>
-    </dependencies>
+         <groupId>net.wasdev.wlp.sample</groupId>
+         <artifactId>daytrader-ee7-ejb</artifactId>
+         <version>1.0-SNAPSHOT</version>
+         <type>ejb</type>
+      </dependency>
+      <dependency>
+         <groupId>net.wasdev.wlp.sample</groupId>
+         <artifactId>daytrader-ee7-web</artifactId>
+         <version>1.0-SNAPSHOT</version>
+         <type>war</type>
+      </dependency>
+      <!-- Derby from https://mvnrepository.com/artifact/org.apache.derby/derby -->
 
-	<build>
-    <finalName>${project.artifactId}</finalName>
-        <plugins>
-	        <plugin>
+      <dependency>
+         <groupId>org.apache.derby</groupId>
+         <artifactId>derby</artifactId>
+         <version>${version.derby}</version>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <finalName>${project.artifactId}</finalName>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version>
+         </plugin>
+         <plugin>
+            <?m2e ignore?>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-ear-plugin</artifactId>
             <version>3.0.2</version>
             <configuration>
-                <version>7</version>
-                <modules>
-                    <webModule>
-                        <groupId>net.wasdev.wlp.sample</groupId>
-                        <artifactId>daytrader-ee7-web</artifactId>
-                        <uri>/daytrader-ee7-web.war</uri>>
-                        <contextRoot>/daytrader</contextRoot>
-                    </webModule>
-                    <ejbModule>
-                        <groupId>net.wasdev.wlp.sample</groupId>
-                        <artifactId>daytrader-ee7-ejb</artifactId>
-                        <uri>/daytrader-ee7-ejb.jar</uri>
-                    </ejbModule>
-                </modules>
+               <version>7</version>
+               <modules>
+                  <webModule>
+                     <groupId>net.wasdev.wlp.sample</groupId>
+                     <artifactId>daytrader-ee7-web</artifactId>
+                     <uri>/daytrader-ee7-web.war</uri>
+                     <contextRoot>/daytrader</contextRoot>
+                  </webModule>
+                  <ejbModule>
+                     <groupId>net.wasdev.wlp.sample</groupId>
+                     <artifactId>daytrader-ee7-ejb</artifactId>
+                     <uri>/daytrader-ee7-ejb.jar</uri>
+                  </ejbModule>
+               </modules>
             </configuration>
-        </plugin>
+         </plugin>
          <plugin>
             <groupId>io.openliberty.tools</groupId>
             <artifactId>liberty-maven-plugin</artifactId>
             <version>3.3.4</version>
             <configuration>
-              <bootstrapProperties>
-                <default.http.port>${testServerHttpPort}</default.http.port>
-                <default.https.port>${testServerHttpsPort}</default.https.port>
-              </bootstrapProperties>
+               <bootstrapProperties>
+                  <default.http.port>${testServerHttpPort}</default.http.port>
+                  <default.https.port>${testServerHttpsPort}</default.https.port>
+               </bootstrapProperties>
             </configuration>
          </plugin>
          <plugin>
@@ -101,7 +109,8 @@
                   </goals>
                   <configuration>
                      <includeArtifactIds>derby</includeArtifactIds>
-                     <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources/DerbyLibs/</outputDirectory>
+                     <outputDirectory>
+                        ${project.build.directory}/liberty/wlp/usr/shared/resources/DerbyLibs/</outputDirectory>
                   </configuration>
                </execution>
             </executions>
@@ -117,7 +126,8 @@
                      <goal>copy-resources</goal>
                   </goals>
                   <configuration>
-                     <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources/data</outputDirectory>
+                     <outputDirectory>
+                        ${project.build.directory}/liberty/wlp/usr/shared/resources/data</outputDirectory>
                      <resources>
                         <resource>
                            <directory>resources/data</directory>
